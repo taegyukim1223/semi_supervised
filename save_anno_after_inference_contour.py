@@ -63,7 +63,7 @@ from tensorboard.backend.event_processing import event_accumulator as ea
 from PIL import Image
 import glob
 
-os.chdir('/home/mts/taegyu/semi_thyroid/123/supervised_test')
+os.chdir('path')
  # 원하는 GPU 번호 입력
 GPU_NUM = 4
 device = torch.device(f'cuda:{GPU_NUM}' if torch.cuda.is_available() else 'cpu')
@@ -96,7 +96,7 @@ targetPattern = r"./*.jpg"
 file_list = glob.glob(targetPattern)
 print('image_num :',len(file_list))
 
-with open('/home/mts/taegyu/semi_thyroid/123/supervised_test/thyroid-supervised-train.json', 'r+', encoding="UTF-8") as f :
+with open('path.json', 'r+', encoding="UTF-8") as f :
 	json_data = json.load(f)
  
 	for d in tqdm(random.sample(val_dataset_dicts, len(file_list))):   
@@ -127,7 +127,7 @@ with open('/home/mts/taegyu/semi_thyroid/123/supervised_test/thyroid-supervised-
 			i2 = outputs["instances"][i1]
 
 			pred_masks = i2._fields['pred_masks'].squeeze().cpu().numpy()
-			contours_list = find_contours(pred_masks)
+			contours_list = find_contours(pred_masks) # find contour method 
 			len1 = len(contours_list[0])
 			coordinate_item = []
 			for idx in range(len1):
